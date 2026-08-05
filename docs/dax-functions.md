@@ -225,11 +225,7 @@ function MinDay =
 
 ## Comparison functions
 
-Every "vs. prior year" or "vs. plan" pair in the report funnels through one of these
-five functions instead of five different one-off `DIVIDE`/subtraction patterns —
-each shares the same blank / future-date / past-date guard logic, so a KPI card never
-shows a misleading "+100%" for a product that simply didn't exist yet, or a blank for
-one that sold out.
+Every "vs. prior year" and "vs. plan" comparison in the report is built on one of these five reusable calculation patterns rather than separate implementations. Each follows the same blank, future-date, and past-date handling, ensuring KPIs remain accurate and never display misleading results—for example, showing "+100%" for a product that didn't exist yet or blanks where meaningful comparisons should still be available.
 
 ```dax
 /// Percentage difference (CurrentValue - PriorValue) / PriorValue for normal

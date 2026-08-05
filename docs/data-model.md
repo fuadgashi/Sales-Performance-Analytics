@@ -6,12 +6,6 @@ dimensions. Source data is imported from an on-premises ERP database via Power
 Query; entity names (customers, stores, products) are generic sample labels — this
 repository documents structure and logic, not real business data.
 
-> **Scope note.** This repository covers **Sales Metrics** only — daily and monthly
-> sales monitoring across time, brand/product, customer/store, and sales-rep
-> dimensions. Pricing & margin, trade marketing/bonus, sales planning, stock, and
-> portfolio analytics are covered in separate, standalone Power BI projects and are
-> out of scope here.
-
 ## Entity-relationship diagram
 
 ```mermaid
