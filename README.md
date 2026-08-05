@@ -12,13 +12,7 @@ are included here.
 
 ## Business context
 
-The business distributes ~10 brands across roughly 4 divisions through three sales
-channels — Modern Trade, Traditional Trade, and E-commerce — via a network of stores
-grouped into regional delivery routes, each served by a sales rep, an area manager,
-and (where applicable) a field merchandiser. This module is the sales team's daily
-pulse check: how is this month tracking against plan and last year, which brands and
-products are driving or dragging performance, which customers need attention, and
-how is each rep's territory doing.
+The business distributes multiple brands across roughly four divisions through three sales channels — Modern Trade, Traditional Trade, and E-commerce — via a network of stores grouped into regional delivery routes, each served by a sales rep, an area manager, and (where applicable) a field merchandiser. This solution provides a centralized view of commercial performance: how is this month tracking against plan and last year, which brands and products are driving or dragging performance, which customers need attention, and how is each rep's territory doing.
 
 ## What this covers
 
