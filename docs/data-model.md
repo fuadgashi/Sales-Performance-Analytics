@@ -6,11 +6,11 @@ dimensions. Source data is imported from an on-premises ERP database via Power
 Query; entity names (customers, stores, products) are generic sample labels — this
 repository documents structure and logic, not real business data.
 
-> **Scope note.** This repository covers the **Sales Metrics** module only — daily
-> and monthly sales monitoring across time, brand/product, customer/store, and
-> sales-rep dimensions. The full solution also includes separate modules for pricing
-> & margin, trade marketing/bonus, sales planning, stock, and portfolio analytics,
-> which are out of scope here.
+> **Scope note.** This repository covers **Sales Metrics** only — daily and monthly
+> sales monitoring across time, brand/product, customer/store, and sales-rep
+> dimensions. Pricing & margin, trade marketing/bonus, sales planning, stock, and
+> portfolio analytics are covered in separate, standalone Power BI projects and are
+> out of scope here.
 
 ## Entity-relationship diagram
 
@@ -38,7 +38,7 @@ erDiagram
 |---|---|
 | **Calendar** | Date dimension spanning last year through this year. Hidden hierarchy (Quarter → Month → Week → Date) plus working-day helper measures (days elapsed/remaining this year, current week/month) that back the [function library](dax-functions.md)'s period-window logic. |
 | **Products** | Product/article master. |
-| **Brands** | Brand master (10 brands across 4 divisions). Carries each brand's commercial growth target (plan index), used by the sales-planning measures referenced from this module's pages. |
+| **Brands** | Brand master (10 brands across 4 divisions). Carries each brand's commercial growth target (plan index), used by the sales-planning measures referenced from this solution's pages. |
 | **Customers** | Customer master. Power Query derives **sales channel** (Modern Trade / Traditional Trade / E-commerce) and a **Key Account tier** from ERP classification codes, plus payment terms and account balance/currency. |
 | **Customer Outlets** | Individual outlet/branch under each customer. Derives sales channel, merchandiser assignment, and regional sales-rep / area-manager codes from location + channel combinations. |
 | **Customer Type** | Lookup restricting the sales fact to genuine sell-through customers (excludes internal/non-sales subject types). |
@@ -49,7 +49,7 @@ erDiagram
 
 | Table | Purpose |
 |---|---|
-| **Sales Invoice Lines** | **The core sales fact table.** One row per invoice line: quantity, list price, discount %, extra discount %, average cost, VAT, and a returns flag. Gross/net unit price and VAT-inclusive cost are computed in Power Query. Every measure in this module is built on this table. |
+| **Sales Invoice Lines** | **The core sales fact table.** One row per invoice line: quantity, list price, discount %, extra discount %, average cost, VAT, and a returns flag. Gross/net unit price and VAT-inclusive cost are computed in Power Query. Every measure in this solution is built on this table. |
 | **Customer Payments** | Customer ledger extract (debits/credits) — source for the "payments received" KPIs shown on the Month and Customer/Store pages. |
 
 ## Relationships

@@ -4,8 +4,8 @@ A **Power BI** sales-monitoring solution built for a multi-brand FMCG/consumer-g
 distribution business — daily and monthly sales performance across time, brand,
 product, customer, store, and sales-rep dimensions.
 
-This repository documents the architecture and DAX behind the solution's **Sales
-Metrics** module. It's a portfolio write-up, not the live report: all entity names in
+This repository documents the architecture and DAX behind this **Sales Analytics**
+solution. It's a portfolio write-up, not the live report: all entity names in
 the underlying model are generic sample labels (`Client 001`, `Store 001`, `Product
 001`, `Brand 1`…), and no real business figures, screenshots, or connection details
 are included here.

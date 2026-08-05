@@ -1,10 +1,10 @@
 # DAX Measure Catalog
 
-The measures below back the 7 pages of the Sales Metrics module (see
+The measures below back the 7 pages of this Sales Analytics solution (see
 [Report Tour](report-pages.md)). Every current/prior/YTD/weekly-average/growth-index
 variant is composed from the [function library](dax-functions.md) rather than
-hand-written per measure — that composition is the pattern to notice throughout this
-catalog, not any individual formula.
+written one-off per measure — that composition is the pattern to notice throughout
+this catalog, not any individual formula.
 
 ## 1. Core sales value & volume
 

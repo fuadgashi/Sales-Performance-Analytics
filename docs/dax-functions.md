@@ -226,7 +226,7 @@ function MinDay =
 ## Comparison functions
 
 Every "vs. prior year" or "vs. plan" pair in the report funnels through one of these
-five functions instead of five different hand-written `DIVIDE`/subtraction patterns —
+five functions instead of five different one-off `DIVIDE`/subtraction patterns —
 each shares the same blank / future-date / past-date guard logic, so a KPI card never
 shows a misleading "+100%" for a product that simply didn't exist yet, or a blank for
 one that sold out.
