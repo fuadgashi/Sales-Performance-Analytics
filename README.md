@@ -22,9 +22,28 @@ how is each rep's territory doing.
 
 ## What this covers
 
-- **Daily & monthly sales monitoring** — value, volume, margin, invoice count, and
+- **Daily & historical sales monitoring** — value, volume, margin, invoice count, and
   numeric distribution, sliced by month, week, brand, product, customer, store, and
-  sales rep.
+  sales rep. It provides day-by-day and full-year historical monitoring, not just a
+  monthly snapshot — a manager can drill into exactly which day drove a swing, or
+  step back and track a multi-month trend, from the same KPI set.
+- **A monthly pulse check with day-level drill-down** — current-month value, margin,
+  invoice count, and products-per-invoice, each benchmarked against prior year and
+  the weekly plan pace, backed by a daily breakdown table for tracing exactly which
+  day drove a swing before it shows up in month-end numbers.
+- **A full-year trend view** — the same KPI set plotted across every month instead of
+  one, for catching a slow multi-month slide rather than reacting to one bad week.
+- **Brand & product performance** — sales, margin, and plan attainment broken out by
+  brand and product, with a top-clients ranking and a sales-share view side by side.
+- **Product-level sales analysis** — value and quantity pivots with sales share, YoY
+  growth index, net average selling price comparison, and a top-customers-per-product
+  ranking.
+- **Customer & store performance** — plan-vs-actual tracked by customer and by store,
+  a weekly payments-received trend, and sales share by channel — sales performance
+  and receivables health seen together, not in separate reports.
+- **Sales rep & territory performance** — rep-level plan attainment, returns, and
+  distribution KPIs, with a geographic map of sales by route/city for spotting an
+  under-serving store without a separate report per territory.
 - **Plan vs. actual tracking** — a sales plan derived automatically from each brand's
   growth target, tracked to achievement rate and variance.
 - **Rankings & sales share** — top customers, top products, and share-of-total views
