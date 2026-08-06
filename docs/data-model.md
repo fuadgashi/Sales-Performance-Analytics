@@ -46,6 +46,14 @@ erDiagram
 | **Sales Invoice Lines** | **The core sales fact table.** One row per invoice line: quantity, list price, discount %, extra discount %, average cost, VAT, and a returns flag. Gross/net unit price and VAT-inclusive cost are computed in Power Query. Every measure in this solution is built on this table. |
 | **Customer Payments** | Customer ledger extract (debits/credits) — source for the "payments received" KPIs shown on the Month and Customer/Store pages. |
 
+### Infrastructure (security & localization)
+
+| Table | Purpose |
+|---|---|
+| **Security** | Row-level-security table — one row per viewer, mapping a UPN to a **role** (which customer outlets / brands they can see) and a **culture**. Disconnected from the relationship graph; read only through `[User Culture]`. |
+| **Labels** | Plain data table — one row per page/visual, per culture, per label role. The source of every piece of user-facing text in the report. Disconnected from the relationship graph. |
+| **Dynamic Labels** | Measure-only table hosting one text measure per label, each a lookup against `Labels`. See below. |
+
 ## Relationships
 
 All relationships are single-direction, many-to-one, and active.
@@ -76,24 +84,58 @@ needing separate current/prior/index measures wired into every visual:
 
 ## Row-level security & dynamic localization
 
-A single access-control table maps each signed-in viewer to a **role** (which
-restricts the customer outlets / brands they can see) and a **culture**. That
-culture value flows into one `[User Culture]` measure, which every visible label in
-the report — page titles, KPI captions, filter headers, navigation menu — reads from
-through a ~200-measure label dictionary:
+Three tables work together to drive a genuinely dynamic, bilingual UI — not two
+duplicated sets of pages.
+
+**`Security`** maps each signed-in viewer to a role and a culture; a single measure
+resolves the culture for everything downstream:
 
 ```dax
-Page Title | Monthly Performance =
-    SWITCH (
-        [User Culture],
-        "en-US", "Monthly Performance",
-        "sq-AL", "Performanca Mujore",
-        "Monthly Performance"          -- default
-    )
+User Culture = SELECTEDVALUE ( Security[Culture], "en-US" )
 ```
 
+**`Labels`** is a plain data table — one row per page/visual, per culture, per label
+role (`Title`, `Subtitle`, `Navigator Title`, `VisualTitle`, `VisualSubtitle`) — keyed
+by a `PageKey` that encodes both the page number and the role as a numeric band
+(page *N*'s Title = `N`, Subtitle = `200+N`, Navigator Title = `400+N`; individual
+visuals use the `1200`/`1400` bands):
+
+| PageKey | PageName | Culture | LabelType | Label |
+|---|---|---|---|---|
+| 1 | MonthlyPerformance | en-US | Title | Monthly Performance |
+| 1 | MonthlyPerformance | sq-AL | Title | Performanca Mujore |
+| 201 | MonthlyPerformance | en-US | Subtitle | Daily and monthly sales pulse check |
+| 401 | MonthlyPerformance | en-US | Navigator Title | Monthly Performance |
+| 1201 | NetSalesCard | en-US | VisualTitle | Net Sales Value |
+| 1201 | NetSalesCard | sq-AL | VisualTitle | Vlera e Shitjeve Neto |
+
+**`Dynamic Labels`** hosts one measure per label, each looking up `Labels` by
+`PageKey`, `LabelType`, and the viewer's culture:
+
+```dax
+'Page 1 | Title' =
+    VAR _culture = [User Culture]
+    RETURN
+        CALCULATE (
+            SELECTEDVALUE ( Labels[Label], "⚠" ),
+            Labels[LabelType] = "Title",
+            Labels[PageKey] = 1,
+            Labels[Culture] = _culture
+        )
+```
+
+The `"⚠"` fallback is deliberate: a missing translation shows up as a visible warning
+on the page instead of silently defaulting to English, so a gap in `Labels` gets
+caught in review rather than shipped.
+
+In the report, every page title is a **hidden action button** — icon, outline, text,
+and fill all set to `show: false` — with its `title`/`subTitle` text bound via `fx`
+straight to the matching `'Page N | Title'` / `'Page N | Subtitle'` measure. Never a
+text box: a text box can't be bound to a measure, so a hardcoded title would stop
+translating the moment someone edited the page.
+
 The report ships with **English as the default culture** and **Albanian as a fully
-supported secondary culture** — a genuinely dynamic runtime switch, not two
-duplicated sets of pages. Assign a viewer's row a different `Culture` value and
-every page, KPI card, and filter relabels instantly; adding a third language means
-adding one more `SWITCH` branch per label, not rebuilding the report.
+supported secondary culture** — a genuinely dynamic runtime switch. Assign a viewer's
+row a different `Culture` value and every page, KPI card, and filter relabels
+instantly; adding a third language means adding one more row per label in `Labels`,
+not touching a single measure or rebuilding the report.

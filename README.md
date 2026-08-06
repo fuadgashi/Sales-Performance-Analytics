@@ -93,9 +93,15 @@ flowchart LR
   misleading "+100%" for a product that didn't exist yet or a blank for one that sold
   out.
 - **Zero-duplication dynamic UI.** One `[User Culture]` measure, resolved from
-  row-level security, drives every page title, KPI label, and filter caption through
-  a single label dictionary — a genuinely live language switch, not two copies of
-  the report.
+  row-level security, drives every page title, KPI label, and filter caption via a
+  `Labels` data table keyed by page/visual and language — a genuinely live language
+  switch, not two copies of the report.
+- **Titles bind to measures, never hardcoded text.** Every page title is a hidden
+  action-button visual with its title/subtitle bound via `fx` straight to a
+  `'Page N | Title'` measure — a text box can't take a measure binding, so this is
+  what keeps a title from silently going stale the moment someone edits the page. A
+  missing translation surfaces as a visible `⚠` instead of quietly falling back to
+  English.
 
 ## License
 
