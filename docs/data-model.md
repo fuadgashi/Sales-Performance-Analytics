@@ -85,57 +85,16 @@ needing separate current/prior/index measures wired into every visual:
 ## Row-level security & dynamic localization
 
 Three tables work together to drive a genuinely dynamic, bilingual UI — not two
-duplicated sets of pages.
-
-**`Security`** maps each signed-in viewer to a role and a culture; a single measure
-resolves the culture for everything downstream:
-
-```dax
-User Culture = SELECTEDVALUE ( Security[Culture], "en-US" )
-```
-
-**`Labels`** is a plain data table — one row per page/visual, per culture, per label
-role (`Title`, `Subtitle`, `Navigator Title`, `VisualTitle`, `VisualSubtitle`) — keyed
-by a `PageKey` that encodes both the page number and the role as a numeric band
-(page *N*'s Title = `N`, Subtitle = `200+N`, Navigator Title = `400+N`; individual
-visuals use the `1200`/`1400` bands):
-
-| PageKey | PageName | Culture | LabelType | Label |
-|---|---|---|---|---|
-| 1 | MonthlyPerformance | en-US | Title | Monthly Performance |
-| 1 | MonthlyPerformance | sq-AL | Title | Performanca Mujore |
-| 201 | MonthlyPerformance | en-US | Subtitle | Daily and monthly sales pulse check |
-| 401 | MonthlyPerformance | en-US | Navigator Title | Monthly Performance |
-| 1201 | NetSalesCard | en-US | VisualTitle | Net Sales Value |
-| 1201 | NetSalesCard | sq-AL | VisualTitle | Vlera e Shitjeve Neto |
-
-**`Dynamic Labels`** hosts one measure per label, each looking up `Labels` by
-`PageKey`, `LabelType`, and the viewer's culture:
-
-```dax
-'Page 1 | Title' =
-    VAR _culture = [User Culture]
-    RETURN
-        CALCULATE (
-            SELECTEDVALUE ( Labels[Label], "⚠" ),
-            Labels[LabelType] = "Title",
-            Labels[PageKey] = 1,
-            Labels[Culture] = _culture
-        )
-```
-
-The `"⚠"` fallback is deliberate: a missing translation shows up as a visible warning
-on the page instead of silently defaulting to English, so a gap in `Labels` gets
-caught in review rather than shipped.
-
-In the report, every page title is a **hidden action button** — icon, outline, text,
-and fill all set to `show: false` — with its `title`/`subTitle` text bound via `fx`
-straight to the matching `'Page N | Title'` / `'Page N | Subtitle'` measure. Never a
-text box: a text box can't be bound to a measure, so a hardcoded title would stop
-translating the moment someone edited the page.
+duplicated sets of pages: `Security` resolves *who* is looking and which culture
+they should see (`User Culture = SELECTEDVALUE(Security[Culture], "en-US")`);
+`Labels` holds *what* every label says, in every supported culture, keyed by a
+`PageKey` band scheme; `Dynamic Labels` holds *the lookup* — one measure per label,
+bound into the report through hidden action-button visuals rather than text boxes.
 
 The report ships with **English as the default culture** and **Albanian as a fully
-supported secondary culture** — a genuinely dynamic runtime switch. Assign a viewer's
-row a different `Culture` value and every page, KPI card, and filter relabels
-instantly; adding a third language means adding one more row per label in `Labels`,
-not touching a single measure or rebuilding the report.
+supported secondary culture**. Assign a viewer's row a different `Culture` value and
+every page, KPI card, and filter relabels instantly; adding a third language means
+adding rows to `Labels`, not touching a single measure or rebuilding the report.
+
+Full reference — the key scheme, every label family worked through, the exact `fx`
+binding, and what changes to add a language: [Dynamic Titles & Localization](dynamic-titles.md).

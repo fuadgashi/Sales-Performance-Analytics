@@ -75,9 +75,10 @@ flowchart LR
 
 | Doc | Contents |
 |---|---|
-| [Data Model](docs/data-model.md) | Star schema, ER diagram, table catalog, relationships, calculation groups, RLS, and the dynamic localization architecture |
+| [Data Model](docs/data-model.md) | Star schema, ER diagram, table catalog, relationships, calculation groups, and RLS |
 | [DAX Function Library](docs/dax-functions.md) | All 23 reusable functions — period-window, period-average/extreme, and comparison families — with full DAX bodies |
 | [DAX Measure Catalog](docs/dax-measures.md) | Sales, plan, margin, invoicing/distribution, payments, and ranking measures, built on the function library |
+| [Dynamic Titles & Localization](docs/dynamic-titles.md) | The `Security` → `Labels` → `Dynamic Labels` chain in full: the `PageKey` band scheme, every label family worked through, the exact report-visual binding, and what changes to add a language |
 | [Report Tour](docs/report-pages.md) | Page-by-page walkthrough of all 7 Sales Metrics pages |
 
 ## Highlights worth a closer look
@@ -101,7 +102,7 @@ flowchart LR
   `'Page N | Title'` measure — a text box can't take a measure binding, so this is
   what keeps a title from silently going stale the moment someone edits the page. A
   missing translation surfaces as a visible `⚠` instead of quietly falling back to
-  English.
+  English. Full write-up: [Dynamic Titles & Localization](docs/dynamic-titles.md).
 
 ## License
 

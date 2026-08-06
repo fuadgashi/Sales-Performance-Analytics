@@ -17,4 +17,4 @@ six different dimensions — the day-to-day sales monitoring surface of the solu
 Every page shares a consistent shell: a bookmarked left-hand navigator, a filter
 panel (date range, brand/product, channel/customer, region/city, rep/manager), and a
 description flyout explaining how to read that page — all localized through the
-dynamic culture switch described in [Data Model](data-model.md#row-level-security--dynamic-localization).
+dynamic title/label system described in [Dynamic Titles & Localization](dynamic-titles.md).
