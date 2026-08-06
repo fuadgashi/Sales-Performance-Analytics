@@ -1,4 +1,4 @@
-# Sales Analytics
+# Sales Performance Analytics
 
 A **Power BI** sales-monitoring solution built for a multi-brand FMCG/consumer-goods
 distribution business — daily and monthly sales performance across time, brand,
