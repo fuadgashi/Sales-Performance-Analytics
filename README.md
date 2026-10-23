@@ -4,7 +4,7 @@ A **Power BI** sales-monitoring solution built for a multi-brand FMCG/consumer-g
 distribution business — daily and monthly sales performance across time, brand,
 product, customer, store, and sales-rep dimensions.
 
-This repository documents the architecture and DAX behind this **Sales Analytics**
+This repository documents the architecture and DAX behind this **Sales Performance Analytics**
 solution. It's a portfolio write-up, not the live report: all entity names in
 the underlying model are generic sample labels (`Client 001`, `Store 001`, `Product
 001`, `Brand 1`…), and no real business figures, screenshots, or connection details
@@ -104,6 +104,15 @@ flowchart LR
   missing translation surfaces as a visible `⚠` instead of quietly falling back to
   English. Full write-up: [Dynamic Titles & Localization](docs/dynamic-titles.md).
 
+## Related projects
+
+Part of a set of Power BI solutions built on the same DAX time-intelligence library and dynamic-localization architecture:
+
+- [Inventory Optimization and Replenishment Analytics](https://github.com/fuadgashi/Inventory-Optimization-and-Replenishment-Analytics)
+- [Strategic Portfolio Analytics](https://github.com/fuadgashi/Strategic-Portfolio-Analytics)
+- [Purchasing and Supplier Analytics](https://github.com/fuadgashi/Purchasing-and-Supplier-Analytics)
+- [Customer Support Analytics](https://github.com/fuadgashi/CustomerSupport-Analytics)
+
 ## License
 
 [MIT](LICENSE) — this repository (documentation, DAX/architecture write-ups) may be
@@ -112,5 +121,5 @@ project files, which remain private.
 
 ## Author
 
-**Fuad Gashi** — Power BI / Business Intelligence developer.
-[GitHub](https://github.com/fuadgashi)
+**Fuad Gashi** — Senior Power BI Consultant.
+[GitHub](https://github.com/fuadgashi) · [Upwork](https://www.upwork.com/freelancers/~010e387a58063279a5) · [LinkedIn](https://www.linkedin.com/in/fuad-gashi-b81268110/)
