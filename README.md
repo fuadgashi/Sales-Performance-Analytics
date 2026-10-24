@@ -106,7 +106,7 @@ flowchart LR
 
 ## Related projects
 
-Part of a set of Power BI solutions built on the same DAX time-intelligence library and dynamic-localization architecture:
+Part of a set of Power BI solutions built with the same approach — a reusable DAX time-intelligence function library and dynamic, bilingual report titles:
 
 - [Inventory Optimization and Replenishment Analytics](https://github.com/fuadgashi/Inventory-Optimization-and-Replenishment-Analytics)
 - [Strategic Portfolio Analytics](https://github.com/fuadgashi/Strategic-Portfolio-Analytics)
